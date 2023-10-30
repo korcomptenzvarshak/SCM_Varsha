@@ -1,0 +1,27 @@
+.body {
+    width: calc(100% - 5rem);
+    height: 100vh;
+    margin-left: 5rem;
+    z-index: auto;
+    position: relative;
+    top: 0;
+    transition: all .5s ease;
+    background: #F8F8F8;
+    padding: 1.5rem 2rem;
+}
+
+.body-trimmed {
+    width: calc(100% - 16.5625rem);
+    margin-left: 16.5625rem;
+}
+
+.body-md-screen {
+    width: calc(100% - 5rem);
+    margin-left: 5rem;
+}
+
+@media (max-width: 767px) {
+    .body {
+        padding: 1rem;
+    }
+}

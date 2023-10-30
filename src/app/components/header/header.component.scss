@@ -1,0 +1,34 @@
+.top-nav .nav-item {
+  display: inline-block;
+  flex-direction: column;
+}
+
+.top-nav .nav-link {
+  font-size: 20px;
+  color: #2a3547;
+  padding: 0;
+}
+
+.top-nav .dropdown-toggle::after {
+  display: none;
+}
+
+.top-nav .badge {
+  position: absolute;
+  transform: scale(0.7);
+  transform-origin: top right;
+  right: -0.75px;
+  margin-top: 1px;
+  color: #fff;
+  background-color: var(--primary);
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  line-height: 11px;
+  text-align: center;
+  font-size: 12px;
+}
+
+.search input {
+  text-indent: 40px;
+}

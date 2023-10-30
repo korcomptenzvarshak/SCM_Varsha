@@ -1,0 +1,195 @@
+.status-card {
+    background: #ECF2FF;
+    border-radius: 15px;
+    padding: 25px 30px;
+}
+
+.status-card:hover {
+    background: #acc1ff;
+}
+
+.status-card i {
+    width: 45px;
+    line-height: 25px;
+    height: 45px;
+    background: var(--primary);
+    padding: 10px;
+    border-radius: 50%;
+    color: #fff;
+    font-size: 16px;
+    margin: 0 0 15px;
+}
+
+.status-card h3 {
+    font-size: 36px;
+    line-height: 44px;
+    color: var(--primary);
+}
+
+.status-card p {
+    font-size: 18px;
+    line-height: 24px;
+    color: var(--primary);
+    margin: 0;
+}
+
+.claim-card ul {
+    padding: 0 20px;
+}
+
+.claim-card li {
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 24px;
+    color: #2A3547;
+}
+
+.claim-card li::marker {
+    color: var(--primary);
+}
+
+.claim-img {
+    width: 73%;
+    margin: 0 auto;
+}
+
+.due-items .day-count {
+    width: 10%;
+    float: left;
+    text-align: center;
+    font-size: 14px;
+    padding: 7px;
+}
+
+.due-items .day-count h6 {
+    font-size: 18px;
+    line-height: 20px;
+    margin: 0;
+    font-weight: 600;
+}
+
+.due-items .day-count span {
+    font-size: 15px;
+    line-height: 18px;
+    margin: 0;
+    font-weight: 600;
+}
+
+.due-end {
+    color: #FF2E2E;
+    border-left: 4px solid red;
+}
+
+.due-warning {
+    color: #FCAE1E;
+    ;
+    border-left: 4px solid #FCAE1E;
+    ;
+}
+
+.due-end h6 {
+    color: #FF2E2E;
+}
+
+.due-warning h6 {
+    color: #FCAE1E;
+}
+
+.due-items .due-info {
+    width: 90%;
+    padding-left: 20px;
+}
+
+.due-items .due-info h5 {
+    font-size: 18px;
+    line-height: 22px;
+    margin-bottom: 5px;
+}
+
+.due-items .due-info p {
+    font-weight: 400;
+    font-size: 14px;
+    margin-bottom: 0;
+    line-height: 20px;
+}
+
+.filter {
+    display: inline-block;
+    width: 5%;
+    color: var(--primary);
+}
+
+.table-striped td {
+    line-height: 20px;
+    text-transform: capitalize;
+    color: #2A3547;
+}
+
+.due-indication-red {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    margin: 0px 5px 0px 0;
+    background: #FF2E2E;
+    display: inline-block;
+}
+
+.due-indication-orange {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    margin: 0px 5px 0px 0;
+    background: #FCAE1E;
+    display: inline-block;
+}
+
+.due-indication-green {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    margin: 0px 5px 0px 0;
+    background: #32CD32;
+    display: inline-block;
+}
+
+.dataTables_length label {
+    font-weight: normal;
+    text-align: left;
+    white-space: nowrap;
+}
+
+.custom-select {
+    width: auto !important;
+    display: inline-block !important;
+    margin-right: 15px;
+    background: url('/src/assets/images/down-filled-triangular-arrow.png') right 3px center/8px 10px no-repeat;
+}
+
+.copy-right {
+    border-radius: 15px;
+}
+
+.card {
+    transition: .5s;
+}
+
+.card:hover {
+    box-shadow: 1px 9px 11px -3px #c5c5c5;
+}
+
+@media (min-width: 768px) {
+    .due-items .day-count {
+        width: 14%;
+    }
+
+    .due-items .due-info {
+        width: 86%;
+        padding-left: 0px;
+    }
+}
+.table-styles{
+    display: inline-block;
+    text-align: center;
+    list-style-type: none;
+    padding: 1%;
+}

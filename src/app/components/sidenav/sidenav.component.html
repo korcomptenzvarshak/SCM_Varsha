@@ -1,0 +1,91 @@
+<div class="sidenav" [ngClass]="collapsed ? 'sidebar-collapsed':''">
+    <div class="logo-container">
+        <button class="logo"><img src="../../assets/images/SHAW_CRP_LOGO_S.png" alt=""></button>
+        <div class="logo-text" @fadeInOut *ngIf="collapsed"><img src="../../assets/images/SHAW_CRP_LOGO.png" alt="">
+        </div>
+        <button class="btn-close" (click)="toggleCollapse()">
+            <i class="fa-solid fa-angles-right close-icon"></i>
+        </button>
+    </div>
+    <ul class="sidenav-nav">
+        <li class="sidenav-nav-item">
+            <a class="sidenav-nav-link" routerLink="/dashboard" routerLinkActive="active"
+                [routerLinkActiveOptions]="{exact:true}">
+                <i class="fas fa-chart-area sidenav-link-icon"></i>
+                <span class="sidenav-link-text" @fadeInOut *ngIf="collapsed">Dashboard</span>
+            </a>
+        </li>
+        <li class="sidenav-nav-item">
+            <a class="sidenav-nav-link" routerLink="/initiateClaim" routerLinkActive="active"
+                [routerLinkActiveOptions]="{exact:true}">
+                <i class="fas fa-book sidenav-link-icon"></i>
+                <span class="sidenav-link-text" @fadeInOut *ngIf="collapsed">Initiate Claim</span>
+            </a>
+        </li>
+        <li class="sidenav-nav-item" >
+            <a class="sidenav-nav-link" routerLink="/reports" routerLinkActive="active"
+                [routerLinkActiveOptions]="{exact:true}">
+                <i class="far fa-clipboard sidenav-link-icon"></i>
+                <span class="sidenav-link-text" @fadeInOut *ngIf="collapsed">Reports</span>
+            </a>
+        </li>
+        <li class="sidenav-nav-item" >
+            <a class="sidenav-nav-link" routerLink="/workQueue" routerLinkActive="active"
+                [routerLinkActiveOptions]="{exact:true}">
+                <i class="fas fa-network-wired sidenav-link-icon"></i>
+                <span class="sidenav-link-text" @fadeInOut *ngIf="collapsed">Work Queue</span>
+            </a>
+        </li>
+        <!-- <li class="sidenav-nav-item" >
+            <a class="sidenav-nav-link" routerLink="/user-mapping" routerLinkActive="active"
+                [routerLinkActiveOptions]="{exact:true}">
+                <i class="fas fa-network-wired sidenav-link-icon"></i>
+                <span class="sidenav-link-text" @fadeInOut *ngIf="collapsed">User-Mapping</span>
+            </a>
+        </li> -->
+        <li class="sidenav-nav-item" >
+            <a class="sidenav-nav-link" routerLink="/user-profile" routerLinkActive="active"
+                [routerLinkActiveOptions]="{exact:true}">
+                <i class="fas fa-network-wired sidenav-link-icon"></i>
+                <span class="sidenav-link-text" @fadeInOut *ngIf="collapsed">User-Profile</span>
+            </a>
+        </li>
+    </ul>
+    <ul class="sidenav-nav setting-btn">
+        <li class="sidenav-nav-item">
+            <a class="sidenav-nav-link" routerLink="/settings" routerLinkActive="active"
+                [routerLinkActiveOptions]="{exact:true}">
+                <i class="fas fa-cog sidenav-link-icon"></i>
+                <span class="sidenav-link-text" @fadeInOut *ngIf="collapsed">Settings</span>
+            </a>
+        </li>
+    </ul>
+    <ul class="sidenav-nav setting-btn">
+        <li class="sidenav-nav-item">
+            <a class="sidenav-nav-link" routerLink="/roles-permissions" routerLinkActive="active"
+                [routerLinkActiveOptions]="{exact:true}">
+                <i class="fas fa-cog sidenav-link-icon"></i>
+                <span class="sidenav-link-text" @fadeInOut *ngIf="collapsed">Roles Permissions</span>
+            </a>
+        </li>
+    </ul>
+    
+    <div class="row">
+        <div class="col-12">
+            <div class="px-3">
+                <hr class="my-2">
+            </div>
+
+        </div>
+    </div>
+
+    <ul class="sidenav-nav logout-btn">
+        <li class="sidenav-nav-item">
+            <a class="sidenav-nav-link">
+                <i class="sidenav-link-icon fas fa-power-off"></i>
+                <span class="sidenav-link-text" @fadeInOut *ngIf="collapsed">Logout</span>
+            </a>
+        </li>
+    </ul>
+
+</div>

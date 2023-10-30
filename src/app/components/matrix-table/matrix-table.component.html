@@ -1,0 +1,195 @@
+<app-sidenav (onToggleSideNav)="onToggleSideNav($event)"></app-sidenav>
+<div class="body" [ngClass]="getBodyClass()">
+  <app-header></app-header>
+  <div class="main">
+    <div class="container-fluid">
+      <div class="row mb-3">
+        <div class="col-lg-12">
+          <div class="d-flex justify-content-between gap-3">
+            <h1 class="mb-0">Role and Permission Table</h1>
+            <button class="btn btn-primary" (click)="openRoleModal()">Add Role</button>
+          </div>
+
+
+        </div>
+      </div>
+
+      <div class="card claim-info p-4">
+        <div class="row mt-2">
+          <div class="col-lg-12">
+            <!--permison mattirx-->
+            <!-- role-permission-table.component.html -->
+            <!-- Your component's HTML -->
+
+            <div>
+
+              <!-- Search input for Permission Code with search icon -->
+              <table mat-table [dataSource]="rolesList" class="mat-elevation-z8 mat-search-box shadow-none">
+
+
+                <ng-container matColumnDef="roleCode">
+
+                  <th mat-header-cell *matHeaderCellDef>
+                    <p>
+                      Roles </p>
+                    <mat-form-field class="">
+                      <input matInput [(ngModel)]="roleCodeFilter" (input)="applyFilter()"
+                        placeholder="Search Role Code">
+                      <mat-icon matPrefix>search</mat-icon>
+                    </mat-form-field>
+                  </th>
+                  <td mat-cell *matCellDef="let role">{{ role.roleCode }}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="permissions">
+                  <th mat-header-cell *matHeaderCellDef>
+                    <p>Roles Associated to Permissions</p>
+                    <mat-form-field class="">
+                      <input matInput [(ngModel)]="permissionCodeFilter" (input)="applyFilter()"
+                        placeholder="Search Permission Code">
+                      <mat-icon matPrefix>search</mat-icon>
+                    </mat-form-field>
+
+
+                  </th>
+                  <td mat-cell *matCellDef="let role">
+                    <mat-chip-list *ngIf="!role.editMode">
+                      <mat-chip *ngFor="let permission of role.permissions">
+                        {{ permission.permissionCode }}
+                      </mat-chip>
+                      <mat-icon class="edit-icon" (click)="toggleEditMode(role)">edit</mat-icon>
+                    </mat-chip-list>
+                    <mat-chip-list *ngIf="role.editMode">
+                      <div *ngIf="role.showPermissions">
+                        <h3>Permissions for {{ role.roleCode }}</h3>
+                        <div *ngFor="let permission of permissions">
+                          <mat-checkbox [checked]="isPermissionSelected(permission.permissionCode, role.permissions)"
+                            (change)="onPermissionChange(permission.permissionId, role.roleId, $event.checked)">{{
+                            permission.permissionCode }}</mat-checkbox>
+                        </div>
+                      </div>
+                      <mat-icon class="edit-icon" (click)="toggleEditMode(role)">done</mat-icon>
+                    </mat-chip-list>
+                  </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="['roleCode', 'permissions']"></tr>
+                <tr mat-row *matRowDef="let row; columns: ['roleCode', 'permissions']"></tr>
+              </table>
+            </div>
+            <!--permison user to roles-->
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- <div class="container mt-4">
+        <div class="d-flex justify-content-between align-items-center">
+          <h1>Roles & Permission Matrix</h1>
+          
+          <div class="d-flex gap-2">
+            <button class="btn btn-primary" (click)="openRoleModal()">Add Role</button>
+          </div>
+        </div>
+        <table class="table mt-3">
+          <thead>
+            <tr>
+              <th>
+                <div class="row align-items-center">
+                  <div class="col-auto">Permission</div>
+                  <div class="col-auto">
+                    <div class="dropdown" (click)="toggleDropdown()">
+                      <span class="material-icons toggle-icon">arrow_drop_down</span>
+                      <div class="dropdown-menu" [ngClass]="{'show': permissionDropdownOpen}">
+                        <button class="dropdown-item" (click)="openPermissionModal()">Add Permission</button>
+                        <button class="dropdown-item" (click)="deleteSelectedPermissions()">Delete Permission</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </th>
+              <th *ngFor="let role of rolesList">{{ role.roleDescription }}
+                <a  class="text-danger" (click)="deleteRole(role.roleId)"><i class="fa-solid fa-trash-can"></i></a>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <ng-container *ngFor="let permission of permissions; let permissionIndex = index">
+              <tr>
+                <td>
+                  <input type="checkbox" [(ngModel)]="selectedPermissions[permission.permissionId]">
+                  {{ permission.permissionCode }}
+                </td>
+                <td *ngFor="let role of rolesList; let roleIndex = index">
+                  <input type="checkbox" [ngModel]="getSelectedValue(roleIndex, permissionIndex)" (change)="togglePermission(roleIndex, permissionIndex)">
+                </td>
+              </tr>
+            </ng-container>
+          </tbody>
+        </table>
+      </div>  -->
+
+
+    <!-- Add Role Modal -->
+    <div class="modal modal-bg" [class.show]="" id="rolemodal" tabindex="-1" aria-labelledby="roleModalLabel"
+      aria-hidden="true">
+      <div class="modal-dialog modal-fullscreen-all modal-dialog-centered">
+        <div class="modal-content px-0">
+          <div class="modal-header">
+            <h5 class="modal-title" id="roleModalLabel">Add Role</h5>
+            <button type="button" class="btn-close" (click)="CloseRoleModal()" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <app-stepper></app-stepper>
+          </div>
+
+          <!-- <div class="modal-body">
+          <form>
+            <div class="mb-3">
+              <label for="roleCode" class="form-label">Role Code:</label>
+              <input type="text" class="form-control" id="roleCode" [(ngModel)]="roleCode">
+            </div>
+            <div class="mb-3">
+              <label for="roleDescription" class="form-label">Role Description:</label>
+              <input type="text" class="form-control" id="roleDescription" [(ngModel)]="roleDescription">
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" (click)="addRole()">Submit</button>
+        </div> -->
+        </div>
+      </div>
+    </div>
+
+    <!-- Add Permission Modal -->
+    <div class="modal modal-bg" [class.show]="" id="permissionmodal" tabindex="-1"
+      aria-labelledby="permissionModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="permissionModalLabel">Add Permission</h5>
+            <button type="button" class="btn-close" (click)="ClosePermissionModal()" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form>
+              <div class="mb-3">
+                <label for="permissionCode" class="form-label">Permission Code:</label>
+                <input type="text" class="form-control" id="permissionCode" [(ngModel)]="permissionCode" />
+              </div>
+              <div class="mb-3">
+                <label for="permissionDescription" class="form-label">Permission Description:</label>
+                <input type="text" class="form-control" id="permissionDescription"
+                  [(ngModel)]="permissionDescription" />
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" (click)="addPermission()">
+              Submit
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

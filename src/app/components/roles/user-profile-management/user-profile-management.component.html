@@ -1,0 +1,675 @@
+
+  <div class="main">
+    <div class="container-fluid">
+      <div class="card claim-info p-4">
+        <div class="row">
+          <div class="col-lg-12">
+            <h4>User Management</h4>
+          </div>
+        </div>
+
+        <div class="row mt-0">
+          <div class="col-12">
+            <div class="d-flex justify-content-end mb-3 mt-3">
+              <button
+                type="button"
+                class="btn btn-primary"
+                (click)="openUserModal()"
+              >
+                Add User
+              </button>
+            </div>
+          </div>
+          <div class="col-md-12">
+            <div class="table-responsive">
+              <table class="table table-striped table-hover table-sorting">
+                <thead>
+                  <tr class="bg-light th-ws-nowrap">
+                    <th (click)="sortColumn('activeDirectoryId', true)">
+                      Active Directory ID
+                      <span
+                        [ngClass]="{
+                          asc: isColumnSorted('activeDirectoryId', 'asc'),
+                          desc: isColumnSorted('activeDirectoryId', 'desc')
+                        }"
+                        >&nbsp;</span
+                      >
+                    </th>
+                    <th (click)="sortColumn('firstName', true)">
+                      First Name
+                      <span
+                        [ngClass]="{
+                          asc: isColumnSorted('firstName', 'asc'),
+                          desc: isColumnSorted('firstName', 'desc')
+                        }"
+                        >&nbsp;</span
+                      >
+                    </th>
+                    <th (click)="sortColumn('middleInitial', true)">
+                      Middle Initial
+                      <span
+                        [ngClass]="{
+                          asc: isColumnSorted('middleInitial', 'asc'),
+                          desc: isColumnSorted('middleInitial', 'desc')
+                        }"
+                        >&nbsp;</span
+                      >
+                    </th>
+                    <th (click)="sortColumn('lastName', true)">
+                      Last Name
+                      <span
+                        [ngClass]="{
+                          asc: isColumnSorted('lastName', 'asc'),
+                          desc: isColumnSorted('lastName', 'desc')
+                        }"
+                        >&nbsp;</span
+                      >
+                    </th>
+                    <th (click)="sortColumn('emailAddress', true)">
+                      Email Address
+                      <span
+                        [ngClass]="{
+                          asc: isColumnSorted('emailAddress', 'asc'),
+                          desc: isColumnSorted('emailAddress', 'desc')
+                        }"
+                        >&nbsp;</span
+                      >
+                    </th>
+
+                    <th (click)="sortColumn('createdDateTime', true)">
+                      Date
+                      <span
+                        [ngClass]="{
+                          asc: isColumnSorted('createdDateTime', 'asc'),
+                          desc: isColumnSorted('createdDateTime', 'desc')
+                        }"
+                        >&nbsp;</span
+                      >
+                    </th>
+                    <th (click)="sortColumn('statusId', true)">
+                      Status
+                      <span
+                        [ngClass]="{
+                          asc: isColumnSorted('statusId', 'asc'),
+                          desc: isColumnSorted('statusId', 'desc')
+                        }"
+                        >&nbsp;</span
+                      >
+                    </th>
+                    <th>Actions</th>
+                    <th>
+                      Customized Permission
+                      
+                    </th>
+                    
+                  </tr>
+                  <tr>
+                    <th>
+                      <input
+                        type="text"
+                        [(ngModel)]="searchText.activeDirectoryId"
+                        (input)="onSearch()"
+                        class="search-input"
+                      />
+                    </th>
+                    <th>
+                      <input
+                        type="text"
+                        [(ngModel)]="searchText.firstName"
+                        (input)="onSearch()"
+                        class="search-input"
+                      />
+                    </th>
+                    <th></th>
+                    <th>
+                      <input
+                        type="text"
+                        [(ngModel)]="searchText.lastName"
+                        (input)="onSearch()"
+                        class="search-input"
+                      />
+                    </th>
+                    <th colspan="5"></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let user of pagedAllUsersListData">
+                    <td>{{ user.activeDirectoryId }}</td>
+                    <td>{{ user.firstName }}</td>
+                    <td>{{ user.middleInitial }}</td>
+                    <td>{{ user.lastName }}</td>
+                    <td>{{ user.emailAddress }}</td>
+                    <td>{{ user.createdDateTime | date : "MM/dd/yyyy" }}</td>
+                    <td class="text-center">
+                      <div class="d-flex justify-content-center">
+                        <label class="form-check form-switch">
+                          <input
+                            class="form-check-input mt-2 model-click"
+                            type="checkbox"
+                            id="flexSwitchCheckDefault"
+                            [checked]="user.statusId === 1"
+                            data-bs-toggle="modal"
+                            data-bs-target="#statusModal"
+                            (click)="openStatusModel(user)"
+                          />
+                        </label>
+                      </div>
+                    </td>
+                    <td class="text-center">
+                      <a class="text-danger model-click" (click)="openDeleteModal(user)"
+                         data-bs-toggle="modal" data-bs-target="#deleteModal" >
+                        <i class="fa-solid fa-trash-can"></i>
+                      </a>
+                    </td>
+                    <td>
+                      <a class="text-primary model-click" (click)="openEditModel(user)" 
+                         data-bs-toggle="modal" data-bs-target="#editModel">
+                        <i class="fa-solid fa-pencil"></i>
+                      </a>
+                    </td>
+                  </tr>
+                  <!-- Add more rows as needed -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-12 col-md-6 text-end text-md-start">
+            <div
+              class="dataTables_paginate paging_simple_numbers d-sm-inline-block"
+            >
+              <ul class="pagination">
+                <li class="page-item">
+                  <a
+                    class="page-link"
+                    (click)="onPreviousPageClick(true)"
+                    aria-label="Previous"
+                  >
+                    <span aria-hidden="true">&laquo;</span>
+                  </a>
+                </li>
+                <li class="page-item" *ngFor="let page of getPageNumbers(true)">
+                  <a
+                    class="page-link"
+                    (click)="onPageNumberClick(page, true)"
+                    [class.active]="page === allUsersCurrentPage"
+                    >{{ page }}</a
+                  >
+                </li>
+                <li class="page-item">
+                  <a
+                    class="page-link"
+                    (click)="onNextPageClick(true)"
+                    aria-label="Next"
+                  >
+                    <span aria-hidden="true">&raquo;</span>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="col-sm-12 col-md-6 mt-2 text-end">
+            <div class="dataTables_length d-sm-inline-block table-page-view">
+              <div class="d-flex align-items-center">
+                <label style="white-space: nowrap; padding-right: 10px">
+                  Per Page
+                </label>
+                <select
+                  class="custom-select custom-select-sm form-select form-control form-control-sm"
+                  [(ngModel)]="allUsersItemsPerPage"
+                  (change)="onItemsPerPageChange(true)"
+                >
+                  <option value="5">5</option>
+                  <option value="10">10</option>
+                  <option value="20">20</option>
+                  <!-- Add more options if needed -->
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div
+      class="modal modal-bg"
+      id="userModal"
+      data-bs-backdrop="static"
+      data-bs-keyboard="false"
+      tabindex="-1"
+      aria-labelledby="userModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-fullscreen-all modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="userModalLabel">
+              Add User Information
+            </h5>
+            <button
+              type="button"
+              class="btn-close"
+              (click)="closeUserModal()"
+            ></button>
+          </div>
+
+          <!-- Modal Body with Fields -->
+          <div class="modal-body">
+            <div class="row">
+              <div class="col-12 col-lg-4">
+                <div class="row mb-3">
+                  <label
+                    for="Store"
+                    class="col-12 col-xxl-3 col-xl-3 col-lg-4 col-md-6 col-sm-12 col-form-label"
+                    >SearchUser</label
+                  >
+                  <!-- <div
+                    class="col-12 col-xxl-8 col-xl-8 col-lg-9 col-md-6 col-sm-12"
+                  > -->
+                    <!-- No dropdown, directly show text input fields -->
+                    <!-- <input
+                      *ngIf="selectedOption === 'FirstName'"
+                      type="text"
+                      class="form-control"
+                      placeholder="Enter First Name"
+                     
+                    />
+                    <input
+                      *ngIf="selectedOption === 'LastName'"
+                      type="text"
+                      class="form-control"
+                      placeholder="Enter Last Name"
+                     
+                    />
+                    <input
+                      *ngIf="selectedOption === 'ActiveDirectoryId'"
+                      type="text"
+                      class="form-control"
+                      placeholder="Enter AD ID"
+                    
+                    />
+                  </div> -->
+                  <div
+                    class="col-12 col-xxl-8 col-xl-8 col-lg-9 col-md-6 col-sm-12"
+                  >
+                    <select
+                      class="form-select form-control"
+                      fromaria-label="Default select example"
+                      (change)="onFilterChange($event)" [(ngModel)]="selectedOption"
+                    >
+                      <option [value]="'default-value'">Select an option</option>
+                      <option value="FirstName">First Name</option>
+                      <option value="LastName">Second Name</option>
+                      <option value="ActiveDirectoryId">AD ID</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 col-lg-6">
+                <div class="row mb-3">
+                  <label
+                    for="userInformation"
+                    class="col-12 col-xxl-5 col-xl-5 col-lg-5 col-md-6 col-sm-12 col-form-label"
+                  >
+                    Enter User Information</label
+                  >
+                  <div
+                    class="col-12 col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12"
+                  >
+                    <form>
+                      <div class="search">
+                        <span
+                          class="cursor-pointer"
+                          [class.disabled]="!userInformation"
+                        >
+                          <i
+                            (click)="userInformation && findByUser()"
+                            class="fa fa-search"
+                          ></i>
+                        </span>
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="userInformation"
+                          placeholder="Search..."
+                          [(ngModel)]="userInformation"
+                        />
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row mt-0">
+              <div class="col-md-12" *ngIf="userData.length > 0">
+                <div class="table-responsive">
+                  <table class="table table-striped table-hover table-sorting">
+                    <thead>
+                      <tr class="bg-light">
+                        <th></th>
+                        <th
+                          scope="col"
+                          (click)="sortColumn('firstName', false)"
+                        >
+                          First Name
+                          <span
+                            [ngClass]="{
+                              asc: isUserFilterColumnSorted('firstName', 'asc'),
+                              desc: isUserFilterColumnSorted(
+                                'firstName',
+                                'desc'
+                              )
+                            }"
+                            >&nbsp;</span
+                          >
+                        </th>
+                        <th scope="col" (click)="sortColumn('lastName', false)">
+                          Last Name
+                          <span
+                            [ngClass]="{
+                              asc: isUserFilterColumnSorted('lastName', 'asc'),
+                              desc: isUserFilterColumnSorted('lastName', 'desc')
+                            }"
+                            >&nbsp;</span
+                          >
+                        </th>
+                        <th scope="col" (click)="sortColumn('userName', false)">
+                          UserName
+                          <span
+                            [ngClass]="{
+                              asc: isUserFilterColumnSorted('userName', 'asc'),
+                              desc: isUserFilterColumnSorted('userName', 'desc')
+                            }"
+                            >&nbsp;</span
+                          >
+                        </th>
+                        <th
+                          scope="col"
+                          (click)="sortColumn('middleInitial', false)"
+                        >
+                          Middle Initial
+                          <span
+                            [ngClass]="{
+                              asc: isUserFilterColumnSorted(
+                                'middleInitial',
+                                'asc'
+                              ),
+                              desc: isUserFilterColumnSorted(
+                                'middleInitial',
+                                'desc'
+                              )
+                            }"
+                            >&nbsp;</span
+                          >
+                        </th>
+                        <th
+                          scope="col"
+                          (click)="sortColumn('emailAddress', false)"
+                        >
+                          Email
+                          <span
+                            [ngClass]="{
+                              asc: isUserFilterColumnSorted(
+                                'emailAddress',
+                                'asc'
+                              ),
+                              desc: isUserFilterColumnSorted(
+                                'emailAddress',
+                                'desc'
+                              )
+                            }"
+                            >&nbsp;</span
+                          >
+                        </th>
+                        <th scope="col" (click)="sortColumn('statusId', false)">
+                          Status
+                          <span
+                            [ngClass]="{
+                              asc: isUserFilterColumnSorted('statusId', 'asc'),
+                              desc: isUserFilterColumnSorted('statusId', 'desc')
+                            }"
+                            >&nbsp;</span
+                          >
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr
+                        *ngFor="let user of pagedUsersListData; let i = index"
+                        [class.selected]="user.selected"
+                        (click)="toggleRowSelection(user)"
+                      >
+                        <td>
+                          <input type="checkbox" [(ngModel)]="user.selected" />
+                        </td>
+                        <td>{{ user.firstName }}</td>
+                        <td>{{ user.lastName }}</td>
+                        <td>{{ user.userName }}</td>
+                        <td>{{ user.middleInitial }}</td>
+                        <td>{{ user.emailAddress }}</td>
+                        <td>
+                          {{ user.statusId == 1 ? "Active" : "InActive" }}
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <div class="row">
+                  <div class="col-sm-12 col-md-6 text-end text-md-start">
+                    <div
+                      class="dataTables_paginate paging_simple_numbers d-sm-inline-block"
+                    >
+                      <ul class="pagination">
+                        <li class="page-item">
+                          <a
+                            class="page-link"
+                            (click)="onPreviousPageClick(false)"
+                            aria-label="Previous"
+                          >
+                            <span aria-hidden="true">&laquo;</span>
+                          </a>
+                        </li>
+                        <li
+                          class="page-item"
+                          *ngFor="let page of getPageNumbers(false)"
+                        >
+                          <a
+                            class="page-link"
+                            (click)="onPageNumberClick(page, false)"
+                            [class.active]="page === userCurrentPage"
+                            >{{ page }}</a
+                          >
+                        </li>
+                        <li class="page-item">
+                          <a
+                            class="page-link"
+                            (click)="onNextPageClick(false)"
+                            aria-label="Next"
+                          >
+                            <span aria-hidden="true">&raquo;</span>
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+
+                  <div class="col-sm-12 col-md-6 mt-2 text-end">
+                    <div
+                      class="dataTables_length d-sm-inline-block table-page-view"
+                    >
+                      <div class="d-flex align-items-center">
+                        <label style="white-space: nowrap; padding-right: 10px">
+                          Per Page
+                        </label>
+                        <select
+                          class="custom-select custom-select-sm form-select form-control form-control-sm"
+                          [(ngModel)]="userItemsPerPage"
+                          (change)="onItemsPerPageChange(false)"
+                        >
+                          <option value="5">5</option>
+                          <option value="10">10</option>
+                          <option value="20">20</option>
+                          <!-- Add more options if needed -->
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12">
+                <div class="table-responsive">
+                  <table class="table table-striped table-hover">
+                    <tbody>
+                      <tr *ngIf="emptyUserData">
+                        <td class="text-center">
+                          <p class="mb-0 py-2">Record Not Found</p>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Modal Footer with Add button -->
+          <div class="modal-footer" *ngIf="userData.length > 0">
+            <div class="row">
+              <div class="col-12 d-flex gap-3 flex-wrap">
+                <button
+                  type="button"
+                  class="btn btn-secondary"
+                  (click)="closeUserModal()"
+                >
+                  Cancel
+                </button>
+                <button
+                  type="button"
+                  class="btn btn-primary"
+                  (click)="addSelectedUser()"
+                  [disabled]="!userRowselected"
+                >
+                  Add
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+
+
+<!-- Delete model information -->
+<div
+  class="modal modal-bg"
+  id="deleteModal"
+  data-bs-backdrop="static"
+  data-bs-keyboard="false"
+  tabindex="-1"
+  aria-labelledby="deleteModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title " id="deleteModalLabel">
+          <i class="fa-solid fa-trash-can"></i> Delete Confirmation
+        </h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-lg-12">
+            <p>Are you sure you want to delete this user?</p>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <div class="row">
+          <div class="col-12 d-flex gap-3 flex-wrap">
+            <button
+              type="button"
+              class="btn btn-primary"
+              (click)="confirmDeleteModel()"
+            >
+              Delete
+            </button>
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Cancel
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Edit Model Information -->
+<div class="modal modal-bg" id="editModel" data-bs-backdrop="static" 
+     data-bs-keyboard="false" tabindex="-1" aria-labelledby="editModelLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="editModelLabel">Edit Permissions</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Selected Permission Here
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" (click)="confirmEditModel()">Ok</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Status Model Information -->
+<div class="modal modal-bg" id="statusModal" data-bs-backdrop="static" 
+     data-bs-keyboard="false" tabindex="-1" aria-labelledby="statusModalLable" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="statusModalLable">Status</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+       The Selected Record need to Eable or Disable
+      </div>
+      <div class="modal-footer">
+        <div class="row">
+          <div class="col-12 d-flex gap-3 flex-wrap">
+            <button
+              type="button"
+              class="btn btn-primary"
+              (click)="confirmStatus()"
+            >
+              Confirm
+            </button>
+            <button
+              type="button"
+              class="btn btn-secondary"
+              (click)="cancelStatus()"
+              data-bs-dismiss="modal"
+            >
+              Cancel
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>

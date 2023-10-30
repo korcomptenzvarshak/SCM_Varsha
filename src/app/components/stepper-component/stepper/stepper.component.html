@@ -1,0 +1,165 @@
+<mat-stepper #stepper class="stepper-section">
+  <mat-step [stepControl]="rolesForm">
+    <form [formGroup]="rolesForm">
+      <ng-template matStepLabel>Roles</ng-template>
+      <div class="row">
+        <div class="col-12 col-lg-4">
+          <div class="form-group">
+            <label for="roleName" class="mb-2">Role Code <span class="text-danger">*</span></label>
+            <input type="text" formControlName="roleCode" id="roleName" class="form-control w-100" />
+
+          </div>
+        </div>
+        <div class="col-12 col-lg-4">
+          <div class="form-group">
+            <label for="name" class="mb-2">Role Description</label>
+            <input type="text" formControlName="roleDescription" id="name" class="form-control w-100" />
+          </div>
+        </div>
+      </div>
+
+      <!-- <p *ngIf="displayMessage.roleCode" class="fail-style">
+        {{ displayMessage.roleCode }}
+      </p> -->
+
+      <!-- <mat-form-field>
+          <input matInput formControlName="userRole"
+          [ngClass]="{ 'is-danger': displayMessage.userRole }">
+        </mat-form-field> -->
+
+      <!-- <section class="example-section">
+        <mat-checkbox class="example-margin"
+          >Assign to the new users by default</mat-checkbox
+        >
+      </section> -->
+
+      <!-- <div class="row">
+        <div class="col-12">
+          <div class="text-end">
+            <button class="btn btn-primary" matStepperPrevious>Back</button>
+            <button class="btn btn-primary ms-3" matStepperNext>Next</button>
+          </div>
+        </div>
+      </div> -->
+
+
+    </form>
+  </mat-step>
+  <mat-step [stepControl]="permissionForm">
+    <form [formGroup]="permissionForm">
+      <ng-template matStepLabel>Permissions</ng-template>
+      <p>Select Permissions</p>
+
+      <section class="example-section">
+        <span class="example-list-section">
+          <ul>
+            <li *ngFor="let permission of permissionsList; let i = index">
+              <mat-checkbox class="example-margin" [checked]="selectedPermissions[permission.permissionId]"
+                (change)="selectAll(permission.permissionId, i)">
+                {{ permission.permissionDescription }}
+              </mat-checkbox>
+              <!-- <i *ngIf="permission.objects.length > 0" class="fas" [ngClass]="{
+                    'fa-chevron-down': expandedPermissions[permission.permissionId],
+                    'fa-chevron-right': !expandedPermissions[permission.permissionId]
+                  }" 
+                  (click)="toggleObjectExpansion(permission.permissionId)">
+                </i> -->
+              <!-- <span class="example-list-section" *ngIf="expandedPermissions[permission.permissionId]">
+                <ul>
+                  <li *ngFor="let object of permission.objects">
+                    <mat-checkbox
+                        [disabled]="true"
+                        [checked]="selectedPermissions[permission.permissionId]"
+                    >
+                    
+                    </mat-checkbox>
+                    <mat-label> {{ object.objectDescription }} </mat-label>
+                  </li>
+                </ul>
+              </span> -->
+            </li>
+          </ul>
+        </span>
+      </section>
+      <!-- <div class="row">
+        <div class="col-12">
+          <div class="text-end">
+            <button class="btn btn-primary" matStepperPrevious>Back</button>
+            <button class="btn btn-primary ms-3" matStepperNext>Next</button>
+          </div>
+        </div>
+      </div> -->
+    </form>
+  </mat-step>
+  <mat-step [stepControl]="userForm">
+    <form [formGroup]="userForm">
+      <ng-template matStepLabel>Users</ng-template>
+      <p>Users List</p>
+
+      <section class="example-section">
+        <span class="example-list-section">
+          <ul>
+            <li *ngFor="let user of usersList; let i = index">
+              <mat-checkbox class="example-margin" [checked]="selectedUser[user.userId]"
+                (change)="selectAllUsers(user.userId, i)">
+                {{ user.firstName +" "+ user.middleInitial +" "+ user.lastName }}
+              </mat-checkbox>
+              <!-- <i class="fas" [ngClass]="{
+                    'fa-chevron-down': expandedUsers[user.userId],
+                    'fa-chevron-right': !expandedUsers[user.userId]
+                  }" 
+                  (click)="toggleUsersExpansion(user.userId)">
+                </i>
+              <span class="example-list-section" *ngIf="expandedUsers[user.userId]">
+                <ul>
+                  <li>
+                    <div class="row">
+                        <div class="col-3">
+                        <label>First Name</label>{{ user.firstName }} </div>
+                        <div class="col-3"> 
+                            <label> Middle initial</label>{{ user.middleInitial }} </div>
+                        <div class="col-3">
+                            <label>Last Name</label> {{ user.lastName}}</div>
+                    </div>
+                  </li>
+                </ul>
+              </span> -->
+            </li>
+          </ul>
+        </span>
+      </section>
+      <!-- <div class="row">
+        <div class="col-12">
+          <div class="text-end">
+            <button class="btn btn-primary" matStepperPrevious>Back</button>
+            <button class="btn btn-primary" (click)="saveDetailsForm()">Save</button>
+          </div>
+        </div>
+      </div> -->
+
+    </form>
+  </mat-step>
+  <div class="row">
+    <div class="col-12">
+      <div class="text-end">
+        <button class="btn btn-primary" mat-button matStepperPrevious type="button">Back</button>
+        <button class="btn btn-primary ms-3" mat-button matStepperNext type="button">Next</button>
+      </div>
+    </div>
+  </div>
+</mat-stepper>
+
+<div class="">
+  <div class="row">
+    <div class="col-12">
+      <div class="text-end">
+        <button class="btn btn-primary" (click)="goBack()" type="button"
+          [disabled]="stepper.selectedIndex === 0">Back</button>
+        <button class="btn btn-primary ms-3" (click)="goForward(stepper)" type="button"
+          [disabled]="stepper.selectedIndex === totalStepsCount-1">Next</button>
+        <button class="btn btn-primary ms-3" (click)="goConfirm()" type="button"
+          [disabled]="stepper.selectedIndex === 0">Save</button>
+      </div>
+    </div>
+  </div>
+</div>

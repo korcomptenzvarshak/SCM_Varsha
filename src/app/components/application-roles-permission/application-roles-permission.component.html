@@ -1,0 +1,142 @@
+<app-sidenav (onToggleSideNav)="onToggleSideNav($event)"></app-sidenav>
+<div class="body" [ngClass]="getBodyClass()">
+    <app-header></app-header>
+    <div class="row">
+        <div class="col-6"><table>
+            <thead>
+                <tr>
+                
+                    <th>Role List</th>
+                </tr>
+            </thead>
+            <tbody>
+                <ng-container *ngFor="let role of rolesList">
+                    <ng-container *ngIf="role.statusId !== 3">
+                        <tr>
+                            <td>
+                                <input type="checkbox" [(ngModel)]="selectedRoles[role.roleId]" />
+                            </td>
+                            <td>{{ role.roleDescription }}</td>
+                        </tr>
+                    </ng-container>
+                </ng-container>
+            </tbody>
+        </table>
+    
+        <button class="d-sm-inline-block btn btn-sm btn-primary" (click)="deleteSelectedRoles()">Delete Role</button>&nbsp;
+    
+    
+    
+        <button class="d-sm-inline-block btn btn-sm btn-primary" (click)="openRoleModal()">
+            Add Role</button></div>
+
+
+        <div class="col-6"><table>
+            <thead>
+                <tr>
+                
+                    <th>Permission List</th>
+                    
+                </tr>
+            </thead>
+            <tbody>
+                <ng-container *ngFor="let permission of permissionsList">
+                    <ng-container *ngIf="permission.statusId !== 3">
+                        <tr>
+                            <td>
+                                <input type="checkbox" [(ngModel)]="selectedPermissions[permission.permissionId]" />
+                            </td>
+                            <td>{{ permission.permissionDescription }}</td>
+                           
+                        </tr>
+                    </ng-container>
+                </ng-container>
+            </tbody>
+        </table>
+    
+        <button class="d-sm-inline-block btn btn-sm btn-primary" (click)="deleteSelectedPermissions()">Delete
+            Permissions</button>&nbsp;
+        <button class="d-sm-inline-block btn btn-sm btn-primary" (click)="openPermissionModal()">
+            Add Permissions</button></div>
+
+        
+    </div>
+
+    <div class="row">
+        <div class="col-12 mt-4">--</div>
+    </div>
+    
+    <div class="modal modal-bg" id="rolemodal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">
+                        Add Role
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                        (click)="CloseRoleModal()"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="roleCode">Role Code:</label>
+                        <input type="text" class="form-control" id="roleCode" [(ngModel)]="roleCode">
+                    </div>
+                    <div class="form-group">
+                        <label for="roleDescription">Role Description:</label>
+                        <input type="text" class="form-control" id="roleDescription" [(ngModel)]="roleDescription">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div class="row">
+                        <div class="col-12 d-flex gap-3 flex-wrap">
+                            <button type="button" class="btn btn-primary" (click)="addRole()">
+                                Submit
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+    
+    
+    <div class="modal modal-bg" id="permissionmodal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">
+                        Add Permission
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                        (click)="ClosePermissionModal()"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="roleCode">Permission Code:</label>
+                        <input type="text" class="form-control" id="permissionCode" [(ngModel)]="permissionCode">
+                    </div>
+                    <div class="form-group">
+                        <label for="roleDescription">Permission Description:</label>
+                        <input type="text" class="form-control" id="permissionDescription"
+                            [(ngModel)]="permissionDescription">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div class="row">
+                        <div class="col-12 d-flex gap-3 flex-wrap">
+                            <button type="button" class="btn btn-primary" (click)="addPermission()">
+                                Submit
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>

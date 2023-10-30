@@ -1,0 +1,71 @@
+/* COLOR DEFAULTS
+============================================= */
+$orange: #ffa600;
+$green: #c1d72e;
+$blue: #82d2e5;
+$white: #fff;
+
+
+/* Mixin
+============================================= */
+@mixin rounded-corners($arc) {
+	-moz-border-radius: $arc;
+	-webkit-border-radius: $arc;
+	border-radius: $arc;
+	/* future proofing */
+	-khtml-border-radius: $arc;
+	/* for old Konqueror browsers */
+}
+
+@mixin fade {
+	-moz-transition: all 1s ease-in;
+	-moz-transition: all 0.3s ease-in-out;
+	-webkit-transition: all 0.3s ease-in-out;
+}
+
+
+/* PLACEHOLDER 
+============================================= */
+
+%btn {
+	@include rounded-corners(3px);
+	@include fade;
+	padding: 10px;
+	color: $white;
+	cursor: pointer;
+	border: none;
+	font-size: 14px;
+	width: 150px;
+	margin: 5px 0;
+	text-align: center;
+	display: block;
+}
+
+/* BUTTON MIXIN 
+============================================= */
+
+@mixin btn-background($btn-background) {
+	@extend %btn;
+	background-color: $btn-background;
+
+	&:hover {
+		background-color: lighten($btn-background, 10%);
+		color: #f3f3f3;
+	}
+}
+
+/* BUTTONS
+============================================= */
+
+.primary-btn {
+	@include btn-background($green);
+}
+
+.secondary-btn {
+	@include btn-background($orange);
+}
+
+
+.info-btn {
+	@include btn-background($blue);
+}

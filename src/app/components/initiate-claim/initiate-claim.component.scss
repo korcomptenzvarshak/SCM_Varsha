@@ -1,0 +1,539 @@
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+.srch-ti input {
+  text-indent: 0;
+}
+.form-input {
+  position: relative;
+}
+.main .form-control {
+  text-indent: 0;
+}
+
+.claim-success-table th,
+.claim-success-table td {
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.customer-details {
+  // font-size: 1.125rem;
+  font-weight: 600;
+  line-height: 22px;
+  letter-spacing: 0em;
+  text-align: left;
+  margin: 5px 0 0 0;
+}
+.calendar_month{
+  position: relative;
+  left: 121px;
+  bottom: 32px;
+  height: 26px;
+  padding: 12px 4px 18px;
+}
+.calendar_month span{
+  position: relative;
+    top: -9px;
+}
+.fs-24 {
+  font-size: 24px;
+}
+.autocomplete {
+  border: 1px solid #767676;
+  border-radius: 0;
+  max-height: 230px;
+  overflow-y: auto;
+  overflow-x: auto;
+  position: absolute;
+  background: white;
+  max-width: 70%;
+}
+.autocompleteOption{
+  padding: 6px 11px;
+  cursor: pointer;
+}
+.autocompleteOption:not(:last-child) {
+  border-bottom:none;
+}
+.autocompleteOption:hover {
+  background-color:#1967d2;
+  color: white;
+}
+.autocompleteNone{
+  border: 1px solid #767676;
+  border-radius: 5px;
+  padding: 8px 10px;
+  background: #ffffff;
+  text-align: left;
+}
+.font-weight-600 {
+  font-weight: 600;
+}
+
+.fs-20 {
+  font-size: 20px;
+}
+
+.font-weight-500 {
+  font-weight: 500;
+}
+
+.invoice-order {
+  font-weight: 500;
+  font-size: 20px;
+  margin-bottom: 25px;
+}
+.phone-0-col {
+  width: 248px;
+}
+.phone-1-col {
+  width: 120px;
+  padding-right: 0;
+}
+.phone-2-col {
+  width: 220px;
+}
+.phone-3-col {
+  width: 70px;
+  padding-right: 0;
+}
+.phone-4-col {
+  width: 100px;
+  padding-left: 0;
+  padding-right: 0;
+}
+.fail-style {
+  color: red;
+  margin: 5px 0 0 0;
+  font-size: 14px;
+  cursor: default;
+  //   position: absolute;
+  //   left: 0;
+}
+.hide-spin-buttons::-webkit-inner-spin-button,
+.hide-spin-buttons::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.hide-spin-buttons::-moz-number-spin-box {
+  -moz-appearance: textfield;
+}
+.datepicker{
+  position: absolute;
+  cursor: pointer;
+  right: 10px;
+  top:5px;
+  margin-top: 0px;
+  color: #5d87ff;
+  font-size: 19px;
+}
+/* Container for the dropdown */
+
+/* Dropdown list style */
+.dropdown ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  z-index: 1;
+  border: 1px solid #767676;
+  // border-top: none;
+  position: absolute;
+  width: 100%;
+  max-height: 350px;
+  overflow: auto;
+}
+
+/* List item style */
+.dropdown li {
+  padding: 4px 10px;
+  font-size: 13px;
+  line-height: 15px;
+  background-color: #fff;
+  cursor: pointer;
+}
+.dropdown li:hover {
+  background-color: rgb(18, 86, 243);
+  color:#fff
+}
+.dropdown {
+  position: relative;
+  display: inline-block;
+  width: 100%; /* Set the desired width */
+}
+/* Style for the down arrow icon */
+.dropdown input[type="text"]::after {
+  content: "\25BC"; /* Down arrow Unicode character */
+  position: absolute;
+
+}
+
+
+
+/* Container for the dropdown */
+
+
+.dropdownIcon {
+  position: absolute;
+  right: 16px;
+  top: 13px;
+}
+
+.dropdownIcon::after {
+  content: '';
+  float: right;
+  padding:.375rem 0 .375rem .75rem;
+  background-repeat: no-repeat;
+  background-image: url("data: image/svg+xml, <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' ><path fill='none' stroke='%235D87FF' stroke-linecap='round' stroke-linejoin='round' stroke-width='3' d='m2 5 6 6 6-6' /></svg>");
+
+}
+
+
+.form-disabled .form-control {
+  background-color: #e8e8ed;
+  border-color: #afafaf;
+  opacity: 1;
+  pointer-events: none;
+}
+.form-disabled + span.datepicker {
+  color:#afafaf;
+  pointer-events: none;
+}
+.form-disabled .btn-primary {
+  background-color: #c7c7c7;
+  border-color: #c7c7c7;
+  opacity: 1;
+  pointer-events: none;
+}
+.form-disabled select.form-control {
+  background-image: url("data: image/svg+xml, <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' ><path fill='none' stroke='%23AFAFAF' stroke-linecap='round' stroke-linejoin='round' stroke-width='3' d='m2 5 6 6 6-6' /></svg>");
+}
+.w-custom {
+  width: 100%;
+}
+
+.bg-light th{
+  background-color: #f3f3f3;
+  border-right: 1px solid #d3d3d3;
+}
+.bg-light th:last-child
+{
+  border-right: none;
+}
+@media screen and (min-width: 992px) {
+  .top-25 {
+    top: 25px;
+  }
+  .w-custom {
+    width: 446px;
+  }
+}
+@media screen and (min-width: 1200px) {
+  .w-custom {
+    width: 446px;
+  }
+  .w-custome-22 {
+    width: 26.333%;
+  }
+
+  .w-custome-77 {
+    width: 73.333%;
+  }
+
+  .w-custome-11 {
+    width: 11.222%;
+  }
+
+  .w-custome-44 {
+    width: 44.333%;
+  }
+}
+.body {
+  width: calc(100% - 5rem);
+  height: 100vh;
+  margin-left: 5rem;
+  z-index: auto;
+  position: relative;
+  top: 0;
+  transition: all 0.5s ease;
+  background: #f8f8f8;
+  padding: 1.5rem 2rem;
+}
+
+.body-trimmed {
+  width: calc(100% - 16.5625rem);
+  margin-left: 16.5625rem;
+}
+
+.body-md-screen {
+  width: calc(100% - 5rem);
+  margin-left: 5rem;
+}
+
+@media (max-width: 767px) {
+  .body {
+    padding: 1rem;
+  }
+  .phone-0-col {
+    width: 248px;
+  }
+  .phone-1-col {
+    width: 70px;
+    padding-right: 0;
+  }
+  .phone-2-col {
+    width: 235px;
+  }
+  .phone-3-col {
+    width: 50px;
+  }
+  .phone-4-col {
+    width: 80px;
+  }
+}
+@media (max-width: 400px) {
+  .phone-3-col,
+  .phone-4-col {
+    margin-top: 10px;
+  }
+}
+
+.search-input {
+  max-width: none;
+  width:100%;
+  outline: none;
+  border: 1px solid var(--primary);
+  border-radius: 5px;
+  font-size: 15px;
+  padding: 5px 6px;
+  /* You can adjust this value as needed */
+}
+
+
+
+
+.pagination-controls {
+  display: flex;
+  align-items: center;
+
+  .btn-secondary {
+    background-color: #6c757d;
+    color: #ffffff;
+    border: none;
+    padding: 5px 10px;
+    margin: 0 2px;
+    border-radius: 5px;
+    cursor: pointer;
+
+    &:hover {
+      background-color: #545b62;
+    }
+
+    &:focus {
+      box-shadow: none;
+    }
+  }
+
+  .active {
+    background-color: #f5f5f5;
+    color: #000000;
+  }
+}
+.table-container {
+  max-height: 400px; /* Adjust the height as needed */
+  overflow-y: auto;
+}
+
+/* Fix table headers */
+.table-nowrap thead th {
+  position: sticky;
+  top: 0;
+  background-color: white;
+  z-index: 1;
+}
+.custom-snackbar {
+  color: black; /* Set the text color to black */
+  background-color: white !important; /* Set the background color to white */
+}
+
+
+// .btn {
+  
+//   color: white;
+
+
+//   font-size: 16px;
+//   border: none;
+//   cursor: arrow;
+// }
+
+
+// .dropbtn:hover, .dropbtn:focus {
+//   background-color: rgb(78, 6, 18);
+// }
+
+
+// #myInput {
+//   box-sizing: border-box;
+//   //background-image: url('searchicon.png');
+//   background-position: 14px 12px;
+//   background-repeat: no-repeat;
+//   font-size: 16px;
+//   padding: 14px 20px 12px 45px;
+//   border: none;
+//   border-bottom: 1px solid #ddd;
+// }
+
+
+#myInput:focus {outline: 3px solid #ddd;}
+
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f6f6f6;
+  min-width: 230px;
+  overflow: auto;
+  border: 1px solid #ddd;
+  z-index: 1;
+}
+
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+
+.dropdown a:hover {background-color: #ddd;}
+
+
+.show {display: block;}
+.custom-snackbar {
+  color: black; /* Set the text color to black */
+  background-color: white !important; /* Set the background color to white */
+}
+
+
+// .btn {
+  
+//   color: white;
+
+
+//   font-size: 16px;
+//   border: none;
+//   cursor: arrow;
+// }
+
+
+// .dropbtn:hover, .dropbtn:focus {
+//   background-color: rgb(78, 6, 18);
+// }
+
+
+// #myInput {
+//   box-sizing: border-box;
+//   //background-image: url('searchicon.png');
+//   background-position: 14px 12px;
+//   background-repeat: no-repeat;
+//   font-size: 16px;
+//   padding: 14px 20px 12px 45px;
+//   border: none;
+//   border-bottom: 1px solid #ddd;
+// }
+
+
+#myInput:focus {outline: 3px solid #ddd;}
+
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f6f6f6;
+  min-width: 230px;
+  overflow: auto;
+  border: 1px solid #ddd;
+  z-index: 1;
+}
+
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+
+.dropdown a:hover
+ {background-color: #ddd;}
+
+.show 
+{display: block;}
+
+.dropdown li.no-dataFound
+{
+  font-size: 14px;
+    padding: 10px 12px;
+    background: #f1f1f1;
+    color:#000000 !important
+}
+// .sortable span {
+//   display: inline-block;
+//   width: 0;
+//   height: 0;
+//   margin-left: 4px;
+// }
+
+// /* Ascending sorting icon */
+// .sortable .asc span::after {
+//   content: "▲"; /* Unicode character for an upward arrow */
+//   width: 1em;
+//   height: 1em;
+// }
+
+// /* Descending sorting icon */
+// .sortable .desc span::after {
+//   content: "▼"; /* Unicode character for a downward arrow */
+//   width: 1em;
+//   height: 1em;
+// }
+
+.table-sorting thead th>span {
+  background: url('../../../assets/images/ic_sortable.svg') no-repeat right top;
+  cursor: pointer;
+  width: 12px;
+  display: inline-block;
+  height: 14px;
+  margin-left: 10px;
+  transition: all 0.5s ease;
+
+  &.asc {
+    background-image: url(../../../assets/images/ic_sortable_asc.svg);
+  }
+
+  &.desc {
+    background-image: url(../../../assets/images/ic_sortable_desc.svg);
+  }
+}
